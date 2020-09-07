@@ -1,0 +1,1 @@
+A bot that gives the availabe times for everyone when people input their available times like When2Meet
