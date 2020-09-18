@@ -43,13 +43,21 @@ This is a general rough plan for our approach to achieving our project goal. We 
 
 ## **Collaboration Plan**
 
+We plan to divide the tasks and meet once a week to discuss and break down the work done over the time. We wish to keep the scope of the project small at first and start adding features once the interface and algorithm is complete. This way of organizing projects helps us focus on the highest risk tasks first, given our limited time frame. Given our plan, we will still keep all memebers of the team updated on the work we've done constantly and consult teammates about any problems or issues we may be having. 
+
 ##
 
 ## **Risks**
 
+- Designing a user-friendly interface
+- Being able to collect and store data especially if users are not local
+- Ensuring that the optimal meeting time for all parties is the output
 ##
 
 ## **Additional Course Content**
+- Building complex functions
+- Connecting python code to interface
+- Storage of user inputted data
 
 
 
