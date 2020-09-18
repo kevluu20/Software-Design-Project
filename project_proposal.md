@@ -49,15 +49,11 @@ We plan to divide the tasks and meet once a week to discuss and break down the w
 
 ## **Risks**
 
-- Designing a user-friendly interface
-- Being able to collect and store data especially if users are not local
-- Ensuring that the optimal meeting time for all parties is the output
+The highest risk is to create a user-friendly interface that combines functionality and design. Without the interface, the project would not be able to be completed. Additionally, collecting and storing data is a challenge for us. We want to be able to send link to all users inputting their information. Be able to store this data and integrate it with the formula is potentially a risk. Finally designing the formula that ensures that the optimal meeting time for all parties is the output can become our biggest risk if we are unable to implement it. 
 ##
 
 ## **Additional Course Content**
-- Building complex functions
-- Connecting python code to interface
-- Storage of user inputted data
+Building complex functions that we can use to write the interface and program. Connecting python code to interface or designing an interface through python. Possible methods to store of user inputted data.
 
 
 
