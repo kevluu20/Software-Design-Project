@@ -36,7 +36,7 @@ This is a general rough plan for our approach to achieving our project goal. We 
 
 #### Week 1-2: Creating a data storage source and interface for the initial user
 #### Week 3-4: Creating an interface that allows following users to submit their availability
-#### Week 5-6:
+#### Week 5-6:Outputting accurate and optimal meeting time
 #### Week 7-8: Final Testing & Implementation
 
 ##
