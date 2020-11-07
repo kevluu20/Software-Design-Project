@@ -14,29 +14,30 @@
 
     <div class="header">
         <h1>Create A New Event For Your Team</h1>
+        <br>
         <p>Developed by Babson Students</p>
     </div>
 
-    <p>
-        <h1><input type="text" name="InputEventName" value="Input Event Name"></h1>
-    </p>
+
+    <h1 id="event"><input id="eventName" type="text" id="eventName" name="InputEventName" value="Input Event Name"></h1>
+
     <br>
-    <h3>Choose a specific date:</h3>
+    <h3 id="heading">Choose a specific date:</h3>
 
     <!-- calender code -->
     <div class="container">
         <div class="calendar">
             <div class="month">
-                <!-- <i class="fas fa-angle-left 
-                prev"></i> -->
+                <i class="fas fa-angle-left 
+                prev"></i>
                 <a href="#" class="previous round">&#8249;</a>
                 <div class="date">
-                    <h1>May</h1>
-                    <p>Fri May 29, 2020</p>
+                    <h1></h1>
+                    <p></p>
                 </div>
                 <a href="#" class="next round">&#8250;</a>
-                <!-- <i class="fas fa-angle-right 
-                next"></i> -->
+                <i class="fas fa-angle-right 
+                next"></i>
             </div>
             <div class="weekdays">
                 <div>Sun</div>
@@ -48,15 +49,10 @@
                 <div>Sat</div>
             </div>
             <div class="days">
-                <div class='prev-date'>26</div>
-                <div class='prev-date'>27</div>
-                <div class='prev-date'>28</div>
-                <div class='prev-date'>29</div>
-                <div class='prev-date'>30</div>
                 <div>1</div>
                 <div>2</div>
                 <div>3</div>
-                <div>4</div>
+                <div class="today">4</div>
                 <div>5</div>
                 <div>6</div>
                 <div>7</div>
@@ -83,20 +79,29 @@
                 <div>28</div>
                 <div>29</div>
                 <div>30</div>
-                <div>31</div>
                 <div class="next-date">1</div>
                 <div class="next-date">2</div>
                 <div class="next-date">3</div>
                 <div class="next-date">4</div>
                 <div class="next-date">5</div>
                 <div class="next-date">6</div>
+                <div class="next-date">7</div>
+                <div class="next-date">8</div>
+                <div class="next-date">9</div>
+                <div class="next-date">10</div>
+                <div class="next-date">11</div>
+                <div class="next-date">12</div>
             </div>
         </div>
     </div>
 
+    <script src="calender1.js"></script>
 
+    <p id="center"><a href="schedule.htm" id="submit"><button id="button">Create Event</button></a></p>
+    <br>
+    <br>
+    <br>
 
-    <p><input type="submit" value="Create Event"></p>
 
 </body>
 

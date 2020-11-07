@@ -1,0 +1,73 @@
+.header {
+    padding: 10px;
+    background: #05a383;
+    color: whitesmoke;
+    font-size: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+#meetName {
+    text-align: center;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+    width: 70%;
+}
+
+.column1 {
+    float: left;
+    padding: 10px;
+    width: 30%;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+html:not(.grid-added) .grid-fieldset {
+    display: none
+}
+
+body {
+    text-align: center;
+}
+
+#availability-grid-form {
+    max-width: 42em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.availability-grid {
+    width: 100%;
+}
+
+#console {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+#a11y-prefs {
+    margin-bottom: 1em;
+}
+
+#a11y-prefs {
+    display: flex;
+    justify-content: center;
+}
+
+#a11y-prefs .selection {
+    padding-top: .75em;
+}
