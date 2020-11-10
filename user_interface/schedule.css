@@ -1,0 +1,118 @@
+    .header {
+        padding: 10px;
+        background: #05a383;
+        color: whitesmoke;
+        font-size: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: sans-serif;
+    }
+    
+    #meetName {
+        text-align: center;
+    }
+    
+    .column {
+        float: left;
+        padding: 10px;
+        width: 70%;
+    }
+    
+    .column1 {
+        float: left;
+        padding: 10px;
+        width: 30%;
+    }
+    
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    
+    body {
+        text-align: center;
+    }
+    
+    .box {
+        position: absolute;
+        height: 1px;
+        width: 1px;
+        overflow: hidden;
+        top: 0;
+    }
+    
+    table.grid {
+        padding-left: 75px;
+        padding-left: 28rem;
+    }
+    
+    table.grid thead th {
+        min-width: 40px;
+        min-width: 2.5rem;
+        /*&:after {
+          @extend %accessibly-hidden ;
+          content:'day';
+        }*/
+    }
+    
+    table.grid tbody tr td {
+        position: relative;
+    }
+    
+    table.grid tbody tr td:first-of-type:after {
+        position: absolute;
+        right: 100%;
+        padding-right: .5em;
+        bottom: 0;
+        text-align: right;
+    }
+    
+    table.grid tbody tr div {
+        display: block;
+        min-height: 2em;
+        position: relative;
+    }
+    
+    table.grid tbody tr input[type="checkbox"] {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background: transparent;
+        position: absolute;
+        z-index: 99999;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 0;
+        width: 100%;
+        cursor: pointer;
+    }
+    
+    table.grid tbody tr div {
+        background: whitesmoke;
+        border: 1px solid grey;
+        transition: all 0.30s ease-in-out;
+        outline: none;
+    }
+    
+    table.grid tbody tr input[type="checkbox"]:checked~div {
+        background: rgb(105, 172, 5);
+        border-color: dimgray;
+    }
+    
+    #submit {
+        height: 25px;
+        width: 250px;
+        font-size: 12pt;
+        text-align: center;
+        background-color: #05a383;
+        color: yellow;
+    }
