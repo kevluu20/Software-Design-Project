@@ -22,7 +22,7 @@ class Schedule:
 
     def schedule_check(self, time):
         """for testing: checks whether you are free at time"""
-        print(self.availability[time.day][time.hour][Time.minute_to_block(time)])
+        return self.availability[time.day][time.hour][Time.minute_to_block(time)]
 
     def schedule_to_time(self):
         """converts schedule to time tuples in a list format"""
@@ -31,20 +31,17 @@ class Schedule:
             for hour in self.availability[day]:
                 for i in range(len(self.availability[day][hour])):
                     if self.availability[day][hour][i]:
-                        time = Time()
-                        time.day = day
-                        time.hour = hour
-                        time.minute = i * 15
+                        time = Time(day, hour, i * 15)
                         time_list.append(time)
         output = []
         for i in range(len(time_list)):
             if i == 0:
                 start = time_list[0]
             elif i == len(time_list) - 1:
-                end = Time.time_add(time_list[-1], 15)
+                end = time_list[-1] = 15
                 output.append((start, end))
             elif Time.time_difference(time_list[i], time_list[i + 1]) > 15:
-                end = Time.time_add(time_list[i], 15)
+                end = time_list[i] + 15
                 output.append((start, end))
                 start = time_list[i + 1]
         return output
@@ -96,7 +93,7 @@ def schedule_maker(time_list):
             # schedule_check(schedule, start)
             # print_time(start)
             # print(schedule)
-            start = Time.time_add(start, 15)
+            start = start + 15
             difference -= 15
 
     return schedule
@@ -116,33 +113,122 @@ def master_schedule(schedule_list):
                 for schedule in schedule_list:
                     if schedule.availability[day][hour][i]:
                         block_list.append(schedule.name)
-                time = Time()
-                time.day = day
-                time.hour = hour
-                time.minute = i * 15
+                time = Time(day, hour, i * 15)
                 if len(block_list) > 0:
                     change_schedule(master.availability, time, block_list)
+                else:
+                    change_schedule(master.availability, time, [])
     return master
 
 
-def scheduler(schedule_list, meeting_length, meeting_restrict, options):
+def scheduler(schedule_list, meeting_length, reverse=False):
     """inputs:
     schedule_list: list of Schedule object with everyone's avaiability
     meeting_length: how long the meeting should take by 15 minute intervals ex: 15, 30, 45, 60, 75, etc.
-    meeting_restrict: schedule object with restricted times
-    options: int of number of options to show
     """
-    pass
+    master = master_schedule(schedule_list)
+    while meeting_length % 15 != 0:
+        meeting_length += 1
+    time_list = []
+    for day in master.availability:
+        for hour in master.availability[day]:
+            for i in range(len(master.availability[day][hour])):
+                if len(master.availability[day][hour][i]) > 0:
+                    start = Time(day, hour, i * 15)
+                    # print(master.schedule_check(start))
+                    end = start + meeting_length
+                    total = 0
+                    people_list = []
+                    for t in range(int(meeting_length / 15)):
+                        time = start + t * 15
+                        total = total + len(
+                            master.availability[time.day][time.hour][
+                                int(time.minute / 15)
+                            ]
+                        )
+                        people_list.append([time, master.schedule_check(time)])
+                    time_list.append([100 / total, start, end, people_list])
+    output = sorted(time_list, reverse=reverse)
+    return output
+    # l = len(master.availability[day][hour][i])
+    # print(master.availability[day][hour][i], time, l)
 
 
-t1 = Time()
-t2 = Time(1, 5, 30)
-t3 = Time(2, 12, 45)
-t4 = Time(4, 6, 15)
-print(t2)
-print(t1)
-brandon = Schedule("Brandon", [(t1, t2), (t3, t4)])
-from pprint import pprint
+def scheduler_print(output, options, reverse=False):
+    """prints best options sorted by: best score(calculated by number of available people), earliest time
+    scheduler_output: list from scheduler output
+    options: int of options to print
+    prints strings
+    """
+    scheduler_output = sorted(output, reverse=reverse)
+    while options > len(scheduler_output):
+        options -= 1
+    for i in range(options):
+        free = f"From {scheduler_output[i][1]} to {scheduler_output[i][2]}. "
+        for blocks in scheduler_output[i][3]:
+            if len(blocks[1]) == 0:
+                free += f"""
+                No one is free from {blocks[0]} to {blocks[0]+15}."""
+            elif 0 < len(blocks[1]) <= 1:
+                free += f"""
+                Person that is free from {blocks[0]} to {blocks[0]+15} is {blocks[1][0]}."""
+            else:
+                free += f"""
+                People that are free from {blocks[0]} to {blocks[0]+15} are """
+                for people in blocks[1]:
+                    free += f"{people}"
+                    if blocks[1].index(people) == len(blocks[1]) - 1:
+                        free += "."
+                    else:
+                        free += ", "
 
-pprint(brandon.availability)
-print(brandon)
+        print(free)
+
+
+# t1 = Time()
+# t2 = Time(1, 5, 30)
+# t3 = Time(2, 12, 45)
+# t4 = Time(4, 6, 15)
+# print(t2)
+# print(t1)
+# brandon = Schedule("Brandon", [(t1, t2), (t3, t4)])
+# anna = Schedule("Anna", [(t1, t3)])
+# from pprint import pprint
+
+# master = master_schedule([anna, brandon])
+# print(master.availability)
+# pprint(brandon.availability)
+# print(brandon)
+# schedule = scheduler([anna, brandon], 90)
+# for item in schedule:
+#     free = f"From {item[1]} to {item[2]}. "
+#     for blocks in item[3]:
+#         free += f"""
+#         people that are free from {blocks[0]} to {blocks[0]+15} are """
+#         for people in blocks[1]:
+#             free += f"{people}; "
+# print(free)
+b1 = Time(3, 9, 00)
+b2 = Time(3, 11, 00)
+
+b3 = Time(3, 12, 30)
+b4 = Time(3, 13, 00)
+
+b4 = Time(3, 15, 30)
+b5 = Time(3, 19, 00)
+
+b6 = Time(3, 21, 00)
+b7 = Time(3, 22, 00)
+
+k1 = Time(3, 8, 00)
+k2 = Time(3, 10, 00)
+
+k3 = Time(3, 13, 30)
+k4 = Time(3, 14, 30)
+
+
+brandon = Schedule("Brandon", [(b1, b2), (b3, b4), (b4, b5), (b6, b7)])
+kevin = Schedule("Kevin", [(k1, k2), (k3, k4)])
+
+schedule = scheduler([brandon, kevin], 30)
+scheduler_print(schedule, 30)
