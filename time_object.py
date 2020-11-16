@@ -17,17 +17,32 @@ class Time:
     def __str__(self):
         """string obj for"""
         day = [
-            "sunday",
-            "monday",
-            "tuesday",
-            "wednesday",
-            "thursday",
-            "friday",
-            "saturday",
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
         ]
-        return f"{self.hour:02}:{self.minute:02} {day[self.day]}"
+        return f"{day[self.day]} {self.hour:02}:{self.minute:02}"
 
-    def time_add(self, minutes):
+    def __gt__(self, other):
+        if self.day > other.day:
+            return True
+        elif self.day < other.day:
+            return False
+        elif self.hour > other.hour:
+            return True
+        elif self.hour < other.hour:
+            return False
+        elif self.minute > other.minute:
+            return True
+        elif self.minute < other.minute:
+            return False
+        return False
+
+    def __add__(self, minutes):
         """input time object and int of minutes, returns new time"""
         new_time = Time(self.day, self.hour, self.minute + minutes)
         if new_time.minute >= 60:
@@ -51,14 +66,9 @@ class Time:
 
     def minute_to_block(self):
         """converts time to block time"""
-        if self.minute < 15:
+        if self.minute < 30:
             return 0
-        elif 15 <= self.minute < 30:
-            return 1
-        elif 30 <= self.minute < 45:
-            return 2
-        else:
-            return 3
+        return 1
 
 
 def main():
