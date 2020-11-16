@@ -66,14 +66,9 @@ class Time:
 
     def minute_to_block(self):
         """converts time to block time"""
-        if self.minute < 15:
+        if self.minute < 30:
             return 0
-        elif 15 <= self.minute < 30:
-            return 1
-        elif 30 <= self.minute < 45:
-            return 2
-        else:
-            return 3
+        return 1
 
 
 def main():

@@ -31,27 +31,27 @@ class Schedule:
             for hour in self.availability[day]:
                 for i in range(len(self.availability[day][hour])):
                     if self.availability[day][hour][i]:
-                        time = Time(day, hour, i * 15)
+                        time = Time(day, hour, i * 30)
                         time_list.append(time)
         output = []
         for i in range(len(time_list)):
             if i == 0:
                 start = time_list[0]
             elif i == len(time_list) - 1:
-                end = time_list[-1] = 15
+                end = time_list[-1] = 30
                 output.append((start, end))
-            elif Time.time_difference(time_list[i], time_list[i + 1]) > 15:
-                end = time_list[i] + 15
+            elif Time.time_difference(time_list[i], time_list[i + 1]) > 30:
+                end = time_list[i] + 30
                 output.append((start, end))
                 start = time_list[i + 1]
         return output
 
 
 def blank_schedule():
-    """we will use 15 min block schedules for 24 hours a day, every day of the week
+    """we will use 30 min block schedules for 24 hours a day, every day of the week
     a first dictionary contains keys 0 - 6 representing the day
     a nested dictionary contains keys 0-23 representing 24 hours
-    a nested list contains four boolean objects representing availability in minutes from 0-15, 15-30, 30-45, 45-60
+    a nested list contains four boolean objects representing availability in minutes from 0-30, 30-60
 
     function returns a blank schedule with no availabilities
     """
@@ -59,7 +59,7 @@ def blank_schedule():
     for day in range(7):
         hour_schedule = {}
         for hour in range(24):
-            hour_schedule[hour] = [False, False, False, False]
+            hour_schedule[hour] = [False, False]
         schedule[day] = hour_schedule
     return schedule
 
@@ -83,9 +83,9 @@ def schedule_maker(time_list):
             return "Error: time range(s) not in order"
         start = copy(starttime)
         end = copy(endtime)
-        while start.minute % 15 != 0:
+        while start.minute % 30 != 0:
             start.minute += 1
-        while end.minute % 15 != 0:
+        while end.minute % 30 != 0:
             end.minute -= 1
         difference = Time.time_difference(start, end)
         while difference > 0:
@@ -93,8 +93,8 @@ def schedule_maker(time_list):
             # schedule_check(schedule, start)
             # print_time(start)
             # print(schedule)
-            start = start + 15
-            difference -= 15
+            start = start + 30
+            difference -= 30
 
     return schedule
 
@@ -103,8 +103,7 @@ def master_schedule(schedule_list):
     """inputs list of all schedule objects
     program determines best time to meet by assigning Schedule.name to each time block in a master schedule
     outputs master schedule"""
-    master = Schedule()
-    master.name = "Master"
+    master = Schedule("Master")
     master.availability = blank_schedule()
     for day in master.availability:
         for hour in master.availability[day]:
@@ -113,7 +112,7 @@ def master_schedule(schedule_list):
                 for schedule in schedule_list:
                     if schedule.availability[day][hour][i]:
                         block_list.append(schedule.name)
-                time = Time(day, hour, i * 15)
+                time = Time(day, hour, i * 30)
                 if len(block_list) > 0:
                     change_schedule(master.availability, time, block_list)
                 else:
@@ -124,26 +123,26 @@ def master_schedule(schedule_list):
 def scheduler(schedule_list, meeting_length, reverse=False):
     """inputs:
     schedule_list: list of Schedule object with everyone's avaiability
-    meeting_length: how long the meeting should take by 15 minute intervals ex: 15, 30, 45, 60, 75, etc.
+    meeting_length: how long the meeting should take by 30 minute intervals ex: 30, 60, 90 etc.
     """
     master = master_schedule(schedule_list)
-    while meeting_length % 15 != 0:
+    while meeting_length % 30 != 0:
         meeting_length += 1
     time_list = []
     for day in master.availability:
         for hour in master.availability[day]:
             for i in range(len(master.availability[day][hour])):
                 if len(master.availability[day][hour][i]) > 0:
-                    start = Time(day, hour, i * 15)
+                    start = Time(day, hour, i * 30)
                     # print(master.schedule_check(start))
                     end = start + meeting_length
                     total = 0
                     people_list = []
-                    for t in range(int(meeting_length / 15)):
-                        time = start + t * 15
+                    for t in range(int(meeting_length / 30)):
+                        time = start + t * 30
                         total = total + len(
                             master.availability[time.day][time.hour][
-                                int(time.minute / 15)
+                                int(time.minute / 30)
                             ]
                         )
                         people_list.append([time, master.schedule_check(time)])
@@ -168,13 +167,13 @@ def scheduler_print(output, options, reverse=False):
         for blocks in scheduler_output[i][3]:
             if len(blocks[1]) == 0:
                 free += f"""
-                No one is free from {blocks[0]} to {blocks[0]+15}."""
+                No one is free from {blocks[0]} to {blocks[0]+30}."""
             elif 0 < len(blocks[1]) <= 1:
                 free += f"""
-                Person that is free from {blocks[0]} to {blocks[0]+15} is {blocks[1][0]}."""
+                Person that is free from {blocks[0]} to {blocks[0]+30} is {blocks[1][0]}."""
             else:
                 free += f"""
-                People that are free from {blocks[0]} to {blocks[0]+15} are """
+                People that are free from {blocks[0]} to {blocks[0]+30} are """
                 for people in blocks[1]:
                     free += f"{people}"
                     if blocks[1].index(people) == len(blocks[1]) - 1:
@@ -230,5 +229,5 @@ k4 = Time(3, 14, 30)
 brandon = Schedule("Brandon", [(b1, b2), (b3, b4), (b4, b5), (b6, b7)])
 kevin = Schedule("Kevin", [(k1, k2), (k3, k4)])
 
-schedule = scheduler([brandon, kevin], 30)
-scheduler_print(schedule, 30)
+schedule = scheduler([brandon, kevin], 60)
+scheduler_print(schedule, 10)
