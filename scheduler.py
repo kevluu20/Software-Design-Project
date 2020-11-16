@@ -10,7 +10,7 @@ class Schedule:
 
     def __init__(self, name="Unclaimed", time_list=[]):
         self.name = name
-        self.availability = schedule_maker(time_list)
+        self.availability = schedule_maker2(time_list)
 
     def __str__(self):
         """prints schedule object"""
@@ -38,7 +38,7 @@ class Schedule:
             if i == 0:
                 start = time_list[0]
             elif i == len(time_list) - 1:
-                end = time_list[-1] = 30
+                end = time_list[-1] + 30
                 output.append((start, end))
             elif Time.time_difference(time_list[i], time_list[i + 1]) > 30:
                 end = time_list[i] + 30
@@ -96,6 +96,14 @@ def schedule_maker(time_list):
             start = start + 30
             difference -= 30
 
+    return schedule
+
+
+def schedule_maker2(time_list):
+    """list of times, outputs schedule in dictionary"""
+    schedule = blank_schedule()
+    for time in time_list:
+        schedule = change_schedule(schedule, time, True)
     return schedule
 
 
@@ -225,9 +233,11 @@ k2 = Time(3, 10, 00)
 k3 = Time(3, 13, 30)
 k4 = Time(3, 14, 30)
 
+test = Schedule("Test", [b1, b2, b3, b4, b5, b6, b7, k1, k2, k3, k4])
+print(test)
 
-brandon = Schedule("Brandon", [(b1, b2), (b3, b4), (b4, b5), (b6, b7)])
-kevin = Schedule("Kevin", [(k1, k2), (k3, k4)])
+# brandon = Schedule("Brandon", [(b1, b2), (b3, b4), (b4, b5), (b6, b7)])
+# kevin = Schedule("Kevin", [(k1, k2), (k3, k4)])
 
-schedule = scheduler([brandon, kevin], 60)
-scheduler_print(schedule, 10)
+# schedule = scheduler([brandon, kevin], 60)
+# scheduler_print(schedule, 10)
