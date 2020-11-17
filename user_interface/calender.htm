@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calender</title>
-    <link rel="stylesheet" href="calender.css">
+    <link rel="stylesheet" href="static/calender.css">
 
 
 </head>
@@ -17,6 +17,17 @@
         let newp = document.createElement('p');
         document.getElementById(member).appendChild(newp);
         counter++;
+    }
+
+    function highlight(x) {
+        let days = document.getElementById("num")
+
+        let number = days.getElementsByClassName("number")
+        if (x == "number") {
+            number.style.color = "yellow"
+        } else {
+            //pass
+        }
     }
 </script>
 
@@ -48,7 +59,7 @@
                 <p id="member"><input type="text" name="memberAdd"></p>
                 <br>
                 <input type="button" value="Add Member" onclick="addMember('member');">
-                <input type="submit" value="Submit">
+
             </form>
 
 
@@ -79,63 +90,64 @@
                         <div>Fri</div>
                         <div>Sat</div>
                     </div>
-                    <div class="days">
-                        <div>1</div>
-                        <div>2</div>
-                        <div>3</div>
-                        <div class="today">4</div>
-                        <div>5</div>
-                        <div>6</div>
-                        <div>7</div>
-                        <div>8</div>
-                        <div>9</div>
-                        <div>10</div>
-                        <div>11</div>
-                        <div>12</div>
-                        <div>13</div>
-                        <div>14</div>
-                        <div>15</div>
-                        <div>16</div>
-                        <div>17</div>
-                        <div>18</div>
-                        <div>19</div>
-                        <div>20</div>
-                        <div>21</div>
-                        <div>22</div>
-                        <div>23</div>
-                        <div>24</div>
-                        <div>25</div>
-                        <div>26</div>
-                        <div>27</div>
-                        <div>28</div>
-                        <div>29</div>
-                        <div>30</div>
-                        <div class="next-date">1</div>
-                        <div class="next-date">2</div>
-                        <div class="next-date">3</div>
-                        <div class="next-date">4</div>
-                        <div class="next-date">5</div>
-                        <div class="next-date">6</div>
-                        <div class="next-date">7</div>
-                        <div class="next-date">8</div>
-                        <div class="next-date">9</div>
-                        <div class="next-date">10</div>
-                        <div class="next-date">11</div>
-                        <div class="next-date">12</div>
+                    <div id="num" class="days">
+                        <div onclick="highlight(x)" class="number">1</div>
+                        <div class="number">2</div>
+                        <div class="number">3</div>
+                        <div class="today" class="number">4</div>
+                        <div class="number">5</div>
+                        <div class="number">6</div>
+                        <div class="number">7</div>
+                        <div class="number">8</div>
+                        <div class="number">9</div>
+                        <div class="number">10</div>
+                        <div class="number">11</div>
+                        <div class="number">12</div>
+                        <div class="number">13</div>
+                        <div class="number">14</div>
+                        <div class="number">15</div>
+                        <div class="number">16</div>
+                        <div class="number">17</div>
+                        <div class="number">18</div>
+                        <div class="number">19</div>
+                        <div class="number">20</div>
+                        <div class="number">21</div>
+                        <div class="number">22</div>
+                        <div class="number">23</div>
+                        <div class="number">24</div>
+                        <div class="number">25</div>
+                        <div class="number">26</div>
+                        <div class="number">27</div>
+                        <div class="number">28</div>
+                        <div class="number">29</div>
+                        <div class="number">30</div>
+                        <div class="next-date" class="number">1</div>
+                        <div class="next-date" class="number">2</div>
+                        <div class="next-date" class="number">3</div>
+                        <div class="next-date" class="number">4</div>
+                        <div class="next-date" class="number">5</div>
+                        <div class="next-date" class="number">5</div>
+                        <div class="next-date" class="number">6</div>
+                        <div class="next-date" class="number">7</div>
+                        <div class="next-date" class="number">8</div>
+                        <div class="next-date" class="number">9</div>
+                        <div class="next-date" class="number">10</div>
+                        <div class="next-date" class="number">11</div>
+                        <div class="next-date" class="number">12</div>
                     </div>
                 </div>
             </div>
 
-            <script src="calender1.js"></script>
+            <script src="calender1.js "></script>
 
-            <p id="center"><a href="schedule.htm" id="submit"><button id="button">Create Event</button></a></p>
+            <p id="center "><a href="schedule.htm " id="submit "><button id="button">Create Event</button></a></p>
         </div>
     </div>
     <br>
     <br>
     <br>
     <footer>
-        <img src="footer.jpg " alt="footer " title="footer " width="100% " height="200px ">
+        <img src="static/footer.jpg " alt="footer " title="footer " width="100% " height="200px ">
     </footer>
 
 </body>
