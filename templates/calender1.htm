@@ -6,26 +6,7 @@
 {% endblock %}
 
 {% block javascript %} 
-<script>
-    let counter = 1;
-
-    function addMember(member) {
-        let newp = document.createElement('p');
-        document.getElementById(member).appendChild(newp);
-        counter++;
-    }
-
-    function highlight(x) {
-        let days = document.getElementById("num")
-
-        let number = days.getElementsByClassName("number")
-        if (x == "number") {
-            number.style.color = "yellow"
-        } else {
-            //pass
-        }
-    }
-</script>
+<script src="{{ url_for('static',filename='calender1.js') }}"></script>
 {% endblock %}
 
 {% block body %} 
@@ -50,9 +31,9 @@
             <p><input type="text"></p>
             <br>
             <h4>Other Members:</h4>
-            <p id="member"><input type="text" name="memberAdd"></p>
+            <div id="member"><input type="text" name="memberAdd"></div>
             <br>
-            <input type="button" value="Add Member" onclick="addMember('member');">
+            <input type="button" value="Add Member" onclick="addMember()">
 
         </form>
 
