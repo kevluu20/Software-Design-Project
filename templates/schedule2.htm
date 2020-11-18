@@ -1,23 +1,83 @@
-{% extends 'base.htm' %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block head %} 
-<link rel="stylesheet" href="{{ url_for('static', filename='schedule.css') }}">
-<title>Meeting Scheduler</title>
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scheduler</title>
+    <link rel="stylesheet" href="../static/schedule.css">
 
-{% block body %} 
+</head>
 
-{% block javascript %} 
-<script src="{{ url_for('static', filename='schedule.js') }}"></script>
-{% endblock %}
+<body>
+    <script>
+        function addMem() {
+            let newDiv = document.createElement('div');
+            newDiv.innerHTML = "<span id='inputBox'><input class='new' type='text' id='newInputBox'><br><br></span>";
+            document.getElementById("others").appendChild(newDiv);
+        }
+
+        function delMem(){
+            let input = document.getElementById("inputBox");
+            input.remove();
+         
+            
+
+        }
+    </script>
+   
     <div class="header">
-        <h1>Reoccurring Meeting Time Generator</h1>
+        <h1>Schedule Reoccurring Meeting Times</h1>
         <br>
         <p>Developed by Babson Students</p>
     </div>
 
+    <form action="" method="GET"  id="team">
+        <br>
+        <h1 id="event"><input id="eventName" type="text" id="eventName" name="InputEventName" value="Input Event Name"></h1>
+        <br>
+        <h3>Team Member Names:</h3>
+        <br>
+        
+        <h4>Team Host:</h4>
+        <p><input type="text"></p>
+        <br>
+        <h4>Other Members:</h4>
+        <p><input type="text"></p>
+        
+        <br>
+        <div id="others"></div>
+        <br>
+    
+        <input id="add" class="submit" type="button" value="Add Member" onclick="addMem();"/>
+        <input class="submit" type="button" value ="Delete Member" onclick='delMem()'/>
+     
 
-    <h1 id="event"><input id="eventName" type="text" id="eventName" name="InputEventName" value="Input Event Name"></h1>
+        <br>
+        <br>
+        <h4>Length of Meeting</h4>
+        <br>
+        <label for="meetingTime">Choose a length:</label>
+        <select id="meetingTime" name="meetingTime">
+          <option value="30min">30 min</option>
+          <option value="60min">1 hr</option>
+          <option value="90min">1.5 hr</option>
+          <option value="120min">2 hr</option>
+          <option value="150min">2.5 hr</option>
+          <option value="180min">3 hr</option>
+          
+
+        </select>
+        <br>
+        <br>
+        <input class="submit" type="submit" value="Submit">
+        <br>
+        <br>
+
+
+    </form>
+
+    <br>
     <br>
     <p>
         Members of a team will each select their available times and the optimal times for everyone to meet will be outputted.
@@ -1326,7 +1386,7 @@
                 </table>
                 <br>
 
-                <button id="submit" type=" submit ">Generate Times</button>
+                <button id="create" type=" submit ">Generate Times</button>
 
             </form>
 
@@ -1342,10 +1402,14 @@
         </div>
     </div>
 
-    <script src="../static/schedule.js"></script>
+    <!-- <script src="../static/schedule.js"></script> -->
 
 
     <footer>
         <img src="../static/footer.jpg " alt="footer " title="footer " width="100% " height="200px ">
     </footer>
-{% endblock %}
+</body>
+
+</html>
+
+</html>

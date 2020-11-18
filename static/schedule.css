@@ -108,10 +108,34 @@
         border-color: dimgray;
     }
     
-    #submit {
+    #create {
         height: 25px;
         width: 250px;
         font-size: 12pt;
+        text-align: center;
+        background-color: #05a383;
+        color: white;
+    }
+
+    #event {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    #eventName {
+        text-align: center;
+        font-size: 30pt;
+        height: 50px;
+    }
+
+    #team {
+        background-color: rosybrown;
+    }
+
+    .submit {
+        height: 25px;
+        width: 110px;
+        font-size: 11pt;
         text-align: center;
         background-color: #05a383;
         color: white;
