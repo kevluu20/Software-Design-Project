@@ -1,23 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.htm' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scheduler</title>
-    <link rel="stylesheet" href="static/schedule.css">
-</head>
+{% block head %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='schedule.css') }}">
+<title>Meeting Scheduler</title>
+{% endblock %}
 
-<body>
+{% block body %} 
 
+{% block javascript %} 
+<script src="{{ url_for('static', filename='schedule.js') }}"></script>
+{% endblock %}
     <div class="header">
-        <h1>Select Your Available Times</h1>
+        <h1>Reoccurring Meeting Time Generator</h1>
         <br>
         <p>Developed by Babson Students</p>
     </div>
 
 
-    <h1 id="meetName">Placeholder for Meeting Name</h1>
+    <h1 id="event"><input id="eventName" type="text" id="eventName" name="InputEventName" value="Input Event Name"></h1>
     <br>
     <p>
         Members of a team will each select their available times and the optimal times for everyone to meet will be outputted.
@@ -1342,14 +1342,10 @@
         </div>
     </div>
 
-    <script src="static/schedule.js"></script>
+    <script src="../static/schedule.js"></script>
 
 
     <footer>
-        <img src="static/footer.jpg " alt="footer " title="footer " width="100% " height="200px ">
+        <img src="../static/footer.jpg " alt="footer " title="footer " width="100% " height="200px ">
     </footer>
-</body>
-
-</html>
-
-</html>
+{% endblock %}

@@ -5,29 +5,6 @@
 <title>Calender</title>
 {% endblock %}
 
-{% block javascript %} 
-<script>
-    let counter = 1;
-
-    function addMember(member) {
-        let newp = document.createElement('p');
-        document.getElementById(member).appendChild(newp);
-        counter++;
-    }
-
-    function highlight(x) {
-        let days = document.getElementById("num")
-
-        let number = days.getElementsByClassName("number")
-        if (x == "number") {
-            number.style.color = "yellow"
-        } else {
-            //pass
-        }
-    }
-</script>
-{% endblock %}
-
 {% block body %} 
 <div class="header">
     <h1>Create A New Event For Your Team</h1>
@@ -50,9 +27,9 @@
             <p><input type="text"></p>
             <br>
             <h4>Other Members:</h4>
-            <p id="member"><input type="text" name="memberAdd"></p>
+            <div id="member"><input type="text" name="memberAdd"></div>
             <br>
-            <input type="button" value="Add Member" onclick="addMember('member');">
+            <input type="button" value="Add Member" onclick="addMember()">
 
         </form>
 
@@ -141,7 +118,12 @@
 <footer>
     <img src="static/footer.jpg " alt="footer " title="footer " width="100% " height="200px ">
 </footer>
+
+{% block javascript %} 
+<script src="{{ url_for('static', filename='calender.js') }}"></script>
 {% endblock %}
+{% endblock %}
+
 
 
 
