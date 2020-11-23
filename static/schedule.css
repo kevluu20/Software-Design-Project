@@ -140,3 +140,7 @@
         background-color: #05a383;
         color: white;
     }
+
+    #meetLength, #meetName {
+        background-color: yellow;
+    }
