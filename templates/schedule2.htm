@@ -34,18 +34,17 @@
 
         }
 
-        let button = document.createElement("Button");
+        const button = document.createElement("Button") ,  buttonTxt = document.createTextNode("Select Times");
+        button.setAttribute('onclick', 'foo()')  // add click function to button
         button.name = "button";
         button.value = "button"
         button.id = "button1"
-        button.onclick = function(){alert('Choose your available times')
-
-
-    
-    
-    }
-        let buttonTxt = document.createTextNode("Select Times");
+        button.onclick = function(){alert('Choose your available times')}
         button.appendChild(buttonTxt);
+
+        function foo() {
+            alert('hello')
+        }
 
         function createButton(){
           
@@ -56,20 +55,15 @@
             let name4 = document.getElementById("name4");
             let name5 = document.getElementById("name5");
 
-            if (name1 && name1.value) {
-                document.getElementById('b1').appendChild(button);
-            } 
-           
-
-
-
+            document.querySelectorAll('#name1,#name2,#name3,#name4,#name5')
+            .forEach(nm=>
+            {
+            if(nm.value) 
+            document.getElementById(`b${nm.id.replace(/^\D+/g,'')}`) // get correspondig B1-5
+                      .appendChild(button.cloneNode(true))  // add a button
+            })
 
         
-            //document.getElementById('b1').appendChild(button);
-            //document.getElementById('b2').appendChild(button);
-            //document.getElementById('b3').appendChild(button);
-            //document.getElementById('b4').appendChild(button);
-            //document.getElementById('b5').appendChild(button);
         }
 
         
@@ -516,7 +510,7 @@
                 </table>
                 <br>
 
-                <button id="create" type=" submit ">Generate Times</button>
+                <button id="create" type=" submit ">Generate Meeting Link</button>
 
             </form>
 
@@ -533,20 +527,20 @@
          
           
             <p id="p1"></p>
-            <p>Times go here</p>
-            <p id="b1" name="b1"></p>
+            <p id="t1">Times go here</p>
+            <p id="b1"></p>
             <p id="p2"></p>
-            <p>Times go here</p>
-            <p id="b2" name="b2"></p>
+            <p id="t2">Times go here</p>
+            <p id="b2"></p>
             <p id="p3"></p>
-            <p>Times go here</p>
-            <p id="b3" name="b3"></p>
+            <p id="t3">Times go here</p>
+            <p id="b3"></p>
             <p id="p4"></p>
-            <p>Times go here</p>
-            <p id="b4" name="b4"></p>
+            <p id="t4">Times go here</p>
+            <p id="b4"></p>
             <p id="p5"></p>
-            <p>Times go here</p>
-            <p id="b5" name="b5"></p>
+            <p id="t5">Times go here</p>
+            <p id="b5"></p>
 
             <h2>Optimal Meeting Times:</h2>
 
