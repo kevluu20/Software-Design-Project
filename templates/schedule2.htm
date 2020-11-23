@@ -11,16 +11,6 @@
 
 <body>
     <script>
-        // function addMem() {
-            // let newDiv = document.createElement('div');
-           //  newDiv.innerHTML = "<span id='inputBox'><input class='new' type='text' name='name' value='' id='newInputBox'><br><br></span>";
-             // document.getElementById("others").appendChild(newDiv);
-       // }
-
-       // function delMem(){
-        //    let input = document.getElementById("inputBox");
-        //    input.remove();
-       // }
 
         function saveInfo(){
          
@@ -35,16 +25,12 @@
         }
 
         const button = document.createElement("Button") ,  buttonTxt = document.createTextNode("Select Times");
-        button.setAttribute('onclick', 'foo()')  // add click function to button
+        button.setAttribute('onclick', 'dynamicB(this)')  // add click function to button
         button.name = "button";
         button.value = "button"
         button.id = "button1"
         button.onclick = function(){alert('Choose your available times')}
         button.appendChild(buttonTxt);
-
-        function foo() {
-            alert('hello')
-        }
 
         function createButton(){
           
@@ -57,13 +43,21 @@
 
             document.querySelectorAll('#name1,#name2,#name3,#name4,#name5')
             .forEach(nm=>
-            {
-            if(nm.value) 
-            document.getElementById(`b${nm.id.replace(/^\D+/g,'')}`) // get correspondig B1-5
-                      .appendChild(button.cloneNode(true))  // add a button
-            })
+              {
+              if(nm.value) 
+                {
+                let newBt = button.cloneNode(true), ref = nm.id.replace(/^\D+/g,'');
+                newBt.dataset.info = ref
+                document.getElementById(`b${ref}`) // get correspondig B1-5
+                .appendChild(newBt)   // add new button 
+                }
+              })
 
-        
+        }
+
+        function dynamicB(bt) {
+            console.clear()
+            console.log('clicked is : ', bt.dataset.info )
         }
 
         
