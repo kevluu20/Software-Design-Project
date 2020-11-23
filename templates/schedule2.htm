@@ -23,18 +23,16 @@
             document.getElementById('meetLength').innerHTML = document.meetinginfo.meetingTime.value;
 
         }
-
+       
         const button = document.createElement("Button") ,  buttonTxt = document.createTextNode("Select Times");
         button.setAttribute('onclick', 'dynamicB(this)')  // add click function to button
         button.name = "button";
         button.value = "button"
-        button.id = "button1"
         button.onclick = function(){alert('Choose your available times')}
         button.appendChild(buttonTxt);
 
         function createButton(){
-          
-
+        
             let name1 = document.getElementById("name1");
             let name2 = document.getElementById("name2");
             let name3 = document.getElementById("name3");
@@ -47,7 +45,7 @@
               if(nm.value) 
                 {
                 let newBt = button.cloneNode(true), ref = nm.id.replace(/^\D+/g,'');
-                newBt.dataset.info = ref
+                newBt.id = "button" + ref
                 document.getElementById(`b${ref}`) // get correspondig B1-5
                 .appendChild(newBt)   // add new button 
                 }
