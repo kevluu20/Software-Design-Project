@@ -12,27 +12,27 @@
 <body>
     <script>
 
+        function saveInfo(){
+         
+            document.getElementById('p1').innerHTML = document.meetinginfo.name1.value;
+            document.getElementById('p2').innerHTML = document.meetinginfo.name2.value;
+            document.getElementById('p3').innerHTML = document.meetinginfo.name3.value;
+            document.getElementById('p4').innerHTML = document.meetinginfo.name4.value;
+            document.getElementById('p5').innerHTML = document.meetinginfo.name5.value;
+            document.getElementById('meetName').innerHTML = document.meetinginfo.InputEventName.value;
+            document.getElementById('meetLength').innerHTML = document.meetinginfo.meetingTime.value;
 
-        const button = document.createElement("Button"), buttonTxt = document.createTextNode("Select Times");
+        }
+       
+        const button = document.createElement("Button") ,  buttonTxt = document.createTextNode("Select Times");
         button.setAttribute('onclick', 'dynamicB(this)')  // add click function to button
         button.name = "button";
         button.value = "button"
-        button.id = "button1"
-        button.onclick = function () { alert('Choose your available times') }
+        button.onclick = function(){alert('Choose your available times')}
         button.appendChild(buttonTxt);
-        var nameArray = ["Brandon", "Anna", "Kevin"];
-        var i;
-        for (i = 0; i < nameArray.length; i++) {
-            if (nameArray[i].value) {
-                let newBt = button.cloneNode(true), ref = nm.id.replace(/^\D+/g, '');
-                newBt.dataset.info = ref
-                document.getElementById(`b${ref}`) // get correspondig B1-5
-                    .appendChild(newBt)   // add new button 
-            }
-        }
-        function createButton() {
 
-
+        function createButton(){
+        
             let name1 = document.getElementById("name1");
             let name2 = document.getElementById("name2");
             let name3 = document.getElementById("name3");
@@ -40,39 +40,92 @@
             let name5 = document.getElementById("name5");
 
             document.querySelectorAll('#name1,#name2,#name3,#name4,#name5')
-                .forEach(nm => {
-                    if (nm.value) {
-                        let newBt = button.cloneNode(true), ref = nm.id.replace(/^\D+/g, '');
-                        newBt.dataset.info = ref
-                        document.getElementById(`b${ref}`) // get correspondig B1-5
-                            .appendChild(newBt)   // add new button 
-                    }
-                })
+            .forEach(nm=>
+              {
+              if(nm.value) 
+                {
+                let newBt = button.cloneNode(true), ref = nm.id.replace(/^\D+/g,'');
+                newBt.id = "button" + ref
+                document.getElementById(`b${ref}`) // get correspondig B1-5
+                .appendChild(newBt)   // add new button 
+                }
+              })
 
         }
 
         function dynamicB(bt) {
             console.clear()
-            console.log('clicked is : ', bt.dataset.info)
+            console.log('clicked is : ', bt.dataset.info )
         }
 
-
+        
         let times = []
         document.getElementById("")
-
+        
+        
     </script>
+   
+    <div class="header">
+        <h1>Schedule Reoccurring Meeting Times</h1>
+        <br>
+        <p>Developed by Babson Students</p>
+    </div>
+
+    <form action="" id="team" name="meetinginfo">
+        <br>
+        <h1 id="event"><input id="eventName" type="text" id="eventName" name="InputEventName" value="Input Event Name"></h1>
+        <br>
+
+        <h3>Team Member Names:</h3>
+        <h6>(Max 5 People per Team)</h6>
+        <br>
+        
+        <h4>Team Host:</h4>
+        <p><input type="text" name="name1" value="Enter Name" id="name1"></p>
+        <br>
+        <h4>Other Members:</h4>
+        <p><input type="text" name="name2" id="name2"></p> 
+        <br>
+        <p><input class='new' type='text' name='name3' id='name3'></p>
+        <br>
+        <p><input class='new' type='text' name='name4' id='name4'></p>
+        <br>
+        <p><input class='new' type='text' name='name5' id='name5'></p>
+        <br> 
+        
+        <h4>Length of Meeting</h4>
+        <br>
+        <label for="meetingTime">Choose a length:</label>
+        <select id="meetingTime" name="meetingTime">
+          <option name="30min" value="30 min">30 min</option>
+          <option name="60min" value="60 min">1 hr</option>
+          <option name="90min" value="90 min">1.5 hr</option>
+          <option name="120min" value="120 min">2 hr</option>
+          <option name="150min" value="150 min">2.5 hr</option>
+          <option name="180min" value="180 min">3 hr</option>
+          
+
+        </select>
+        <br>
+        <br>
+        <p><input class="submit" type="submit" value="Submit" onclick="saveInfo(); createButton(); return false" ></p>
+        <br>
+        <br>
 
 
+    </form>
+
+    <br>
+    <br>
     <p>
-        Members of a team will each select their available times and the optimal times for everyone to meet will be
-        outputted.
+        Members of a team will each select their available times and the optimal times for everyone to meet will be outputted.
     </p>
     <br>
     <div class="row">
         <div class="column">
             <h2>Select Times:</h2>
             <br>
-            <form method="POST" action="#" id="grid-form">
+            <form action="#" id="grid-form">
 
                 <table id="grid" class="grid">
 
@@ -764,50 +817,44 @@
                 </table>
                 <br>
 
-                <button id="create" type=" submit ">Generate Times</button>
+                <button id="create" type=" submit ">Generate Meeting Link</button>
 
             </form>
 
         </div>
 
-
-        <div class="column1">
+       
+        <div class="column1"  >
             <h3>Times Available for:</h3>
-            <u>
-                <h2>{{event}}</h2>
-            </u>
+            <u><h2 id="meetName"></h2></u>
             <br>
             <h3>Length of Meeting:</h3>
-            <u>
-                <h2>{{length}}</h2>
-            </u>
+            <u><h2 id="meetLength"></h2></u>
             <br>
-
-            <p>{{name1}}</p>
+         
+          
+            <p id="p1"></p>
             <p id="t1">Times go here</p>
             <p id="b1"></p>
-            <p>{{name2}}</p>
+            <p id="p2"></p>
             <p id="t2">Times go here</p>
             <p id="b2"></p>
-            <p>{{name3}}</p>
+            <p id="p3"></p>
             <p id="t3">Times go here</p>
             <p id="b3"></p>
-            <p>{{name4}}</p>
+            <p id="p4"></p>
             <p id="t4">Times go here</p>
             <p id="b4"></p>
-            <p>{{name5}}</p>
+            <p id="p5"></p>
             <p id="t5">Times go here</p>
             <p id="b5"></p>
 
             <h2>Optimal Meeting Times:</h2>
-            <h1>{{optimal}}</h1>
-            <p>{{detail}}</p>
 
 
         </div>
-
+    
     </div>
-
 
     <!-- <script src="../static/schedule.js"></script> -->
 
