@@ -170,6 +170,9 @@ def scheduler_print(output, options, reverse=False):
     scheduler_output = sorted(output, reverse=reverse)
     while options > len(scheduler_output):
         options -= 1
+    final = f"""
+    The optimal times to meet are:
+    """
     for i in range(options):
         free = f"From {scheduler_output[i][1]} to {scheduler_output[i][2]}. "
         for blocks in scheduler_output[i][3]:
@@ -189,7 +192,10 @@ def scheduler_print(output, options, reverse=False):
                     else:
                         free += ", "
 
-        print(free)
+        final += f"""
+        {free}
+        """
+    return final
 
 
 # t1 = Time()
@@ -215,26 +221,26 @@ def scheduler_print(output, options, reverse=False):
 #         for people in blocks[1]:
 #             free += f"{people}; "
 # print(free)
-b1 = Time(3, 9, 00)
-b2 = Time(3, 11, 00)
+# b1 = Time(3, 9, 00)
+# b2 = Time(3, 11, 00)
 
-b3 = Time(3, 12, 30)
-b4 = Time(3, 13, 00)
+# b3 = Time(3, 12, 30)
+# b4 = Time(3, 13, 00)
 
-b4 = Time(3, 15, 30)
-b5 = Time(3, 19, 00)
+# b4 = Time(3, 15, 30)
+# b5 = Time(3, 19, 00)
 
-b6 = Time(3, 21, 00)
-b7 = Time(3, 22, 00)
+# b6 = Time(3, 21, 00)
+# b7 = Time(3, 22, 00)
 
-k1 = Time(3, 8, 00)
-k2 = Time(3, 10, 00)
+# k1 = Time(3, 8, 00)
+# k2 = Time(3, 10, 00)
 
-k3 = Time(3, 13, 30)
-k4 = Time(3, 14, 30)
+# k3 = Time(3, 13, 30)
+# k4 = Time(3, 14, 30)
 
-test = Schedule("Test", [b1, b2, b3, b4, b5, b6, b7, k1, k2, k3, k4])
-print(test)
+# test = Schedule("Test", [b1, b2, b3, b4, b5, b6, b7, k1, k2, k3, k4])
+# print(test)
 
 # brandon = Schedule("Brandon", [(b1, b2), (b3, b4), (b4, b5), (b6, b7)])
 # kevin = Schedule("Kevin", [(k1, k2), (k3, k4)])

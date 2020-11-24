@@ -10,6 +10,7 @@ class Time:
     """
 
     def __init__(self, day=0, hour=0, minute=0):
+        """input day as integer 0-6, hour as integer 0-23, minute as integer 0-59"""
         self.day = day
         self.hour = hour
         self.minute = minute
@@ -28,6 +29,7 @@ class Time:
         return f"{day[self.day]} {self.hour:02}:{self.minute:02}"
 
     def __gt__(self, other):
+        """compares 2 Times to create special method: greater than"""
         if self.day > other.day:
             return True
         elif self.day < other.day:
@@ -44,17 +46,21 @@ class Time:
 
     def __add__(self, minutes):
         """input time object and int of minutes, returns new time"""
+        # copies self into new_time and adds extra muinutes
         new_time = Time(self.day, self.hour, self.minute + minutes)
+        # turns extra minutes to hours
         if new_time.minute >= 60:
             extra = int(new_time.minute / 60)
             new_time.minute -= 60 * extra
             new_time.hour += extra
+        # turns extra hours to days
         if new_time.hour >= 24:
             extra = int(new_time.hour / 24)
             new_time.hour -= 24 * extra
             new_time.day += extra
+        # sets extra days to max saturday
         if new_time.day >= 7:
-            new_time.day = 7
+            new_time.day = 6
         return new_time
 
     def time_difference(self, other):
