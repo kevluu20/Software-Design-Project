@@ -9,9 +9,25 @@
 
 </head>
 
+<style>
+
+    .subheader {
+        background-color: yellow;
+    }
+
+    #addInfo {
+        padding: 30px;
+        background: #05a383;
+        color: whitesmoke;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+</style>
+
 <body>
     <script>
-
 
         const button = document.createElement("Button"), buttonTxt = document.createTextNode("Select Times");
         button.setAttribute('onclick', 'dynamicB(this)')  // add click function to button
@@ -25,7 +41,7 @@
         for (i = 0; i < nameArray.length; i++) {
             if (nameArray[i].value) {
                 let newBt = button.cloneNode(true), ref = nm.id.replace(/^\D+/g, '');
-                newBt.dataset.info = ref
+               newBt.dataset.info = ref
                 document.getElementById(`b${ref}`) // get correspondig B1-5
                     .appendChild(newBt)   // add new button 
             }
@@ -51,19 +67,16 @@
 
         }
 
-        function dynamicB(bt) {
-            console.clear()
-            console.log('clicked is : ', bt.dataset.info)
-        }
+        //function dynamicB(bt) {
+          //  console.clear()
+          //  console.log('clicked is : ', bt.dataset.info)
+      //  }
 
-
-        let times = []
-        document.getElementById("")
 
     </script>
 
 
-    <p>
+    <p id="addInfo">
         Members of a team will each select their available times and the optimal times for everyone to meet will be
         outputted.
     </p>
@@ -774,12 +787,12 @@
         <div class="column1">
             <h3>Times Available for:</h3>
             <u>
-                <h2>{{event}}</h2>
+                <h2 class="subheader">{{event}}</h2>
             </u>
             <br>
             <h3>Length of Meeting:</h3>
             <u>
-                <h2>{{length}}</h2>
+                <h2 class="subheader">{{length}}</h2>
             </u>
             <br>
 
