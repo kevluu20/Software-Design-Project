@@ -26,7 +26,7 @@ def host():
             with open(f"events/{event_name}.pickle", "wb") as f:
                 pickle.dump(event_dict, f)
         else:
-            return "EVENT NAME ALREADY EXISTS"  # need help
+            return render_template("errorpage.html") # need help
         if event:
             return redirect(f"/{event_name}")
     return render_template("hostpage.html")
@@ -42,7 +42,7 @@ def event(name):
     free = ""
     if request.method == "POST":
         schedule = request.form
-        person = ["Kevin"]
+        person = ["Anna"]
         schedule_list = []
         for item in schedule:
             schedule_list.append(item)

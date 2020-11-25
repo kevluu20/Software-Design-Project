@@ -4,14 +4,97 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>This is Homepage</title>
+    <title>Meeting Scheduler Homepage</title>
 </head>
 
+<style>
+    * {
+        box-sizing: border-box;
+        text-align: center;
+        font-family: sans-serif;
+      }
+      
+      .row {
+        display: flex;
+      }
+      
+      /* Create two equal columns that sits next to each other */
+      .column {
+        flex: 50%;
+        padding: 10px;
+        margin-top: -35px;
+      }
+
+      h1 {
+        padding: 20px;
+        background: #05a383;
+        color: whitesmoke;
+        font-size: 50px;
+        font-weight: bolder;
+        text-align: center;
+        
+      }
+
+      button {
+        height: 40px;
+        width: 140px;
+        font-size: 15pt;
+        text-align: center;
+        background-color: #05a383;
+        
+      }
+
+      #link, #search {
+          text-decoration: none;
+          color: white;
+      }
+
+      #search {
+          font-size: 11pt;
+          height: 25px;
+          width: 120px;
+
+      }
+
+      form {
+          background-color: rosybrown;
+          padding: 10px;
+      }
+
+</style>
+
 <body>
-    <h1>Meeting</h1>
-    <p>
-        <a href="{{ url_for('host') }}">Create a New Meeting</a>
-    </p>
+    <h1>Meeting Scheduler Homepage</h1>
+
+
+    <div class="row">
+        <div class="column">
+        <form method="POST" action="#">
+          <h2>Search for Existing Meeting</h2>
+          <h3>Event Name</h3>
+          <input type="text">
+          <h3>Your Name</h3>
+          <input type="text">
+          <br>
+          <br>
+          <button id="search" type="submit">Search Meeting</button>
+        </form>
+        </div>
+        <div class="column">
+          <h2>Create a New Meeting</h2>
+          <button>
+            <a id="link" href="{{ url_for('host') }}">Click Here</a>
+         </button>
+        </div>
+      </div>
+      
+      <footer>
+        <img src="../static/footer.jpg " alt="footer " title="footer " width="100% " height="200px ">
+    </footer>
+    
+      
+
+
 </body>
 
 </html>
