@@ -14,6 +14,8 @@ class Schedule:
 
     def __str__(self):
         """prints schedule object"""
+        if self.availability == blank_schedule():
+            return f"{self.name} has not inputted their availability yet or is busy at all given times."
         schedule_list = self.schedule_to_time()
         output = f"{self.name} is free from "
         for start, end in schedule_list:
@@ -37,7 +39,14 @@ class Schedule:
         for i in range(len(time_list)):
             if i == 0:
                 start = time_list[0]
+                if len(time_list) == 1:
+                    end = time_list[0] + 30
+                    output.append((start, end))
             elif i == len(time_list) - 1:
+                if Time.time_difference(time_list[-2], time_list[-1]) > 30:
+                    end = time_list[-2] + 30
+                    output.append((start, end))
+                    start = time_list[-1]
                 end = time_list[-1] + 30
                 output.append((start, end))
             elif Time.time_difference(time_list[i], time_list[i + 1]) > 30:
