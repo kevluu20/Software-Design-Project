@@ -26,7 +26,14 @@ class Time:
             "Friday",
             "Saturday",
         ]
-        return f"{day[self.day]} {self.hour:02}:{self.minute:02}"
+        m = "am"
+        conv_hour = self.hour
+        if self.hour > 12:
+            conv_hour = self.hour - 12
+        if self.hour >= 12:
+            m = "pm"
+
+        return f"{day[self.day]} {conv_hour:02}:{self.minute:02} {m}"
 
     def __gt__(self, other):
         """compares 2 Times to create special method: greater than"""
