@@ -3,7 +3,7 @@ import pickle
 import os
 from werkzeug.datastructures import ImmutableMultiDict
 from converter import optimal_time, pickle_reader
-from scheduler import Schedule
+from scheduler import Schedule, blank_schedule
 
 # set FLASK_APP=app.py
 # set FLASK_ENV=development
@@ -14,6 +14,7 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
+    # looks for post request and attempts to search for the name and event
     if request.method == "POST":
         event_name = request.form["event_name"].replace(" ", "").lower()
         person_name = request.form["person_name"].replace(" ", "")
@@ -35,6 +36,8 @@ def host():
             name = event_dict[f"name{i+1}"].replace(" ", "")
             if not name == "":
                 name_list.append(name)
+        if len(name_list) != len(set(name_list)):
+            return render_template("errorpage.html")
         if not os.path.isfile(f"events/{event_name}.pickle"):
             # pickles info into event pickle and name pickle
             with open(f"events/{event_name}.pickle", "wb") as f:
@@ -66,14 +69,25 @@ def event(event_name, name):
         time_name = output[f"name{i+1}"]
         # checks for case sensativity otherwise program breaks
         check = name == time_name or check
-        # creates a schedule object from pickle_reader in converter
+        # creates a schedule object from pickle_reader in converter and checks if it exists
         schedule = pickle_reader(time_name, event_name)
-        time_list.append(schedule)
+        if isinstance(schedule, str):
+            time_list.append("")
+        elif schedule.availability == blank_schedule():
+            time_list.append(f"{time_name} has not submited their availability yet.")
+        else:
+            time_list.append(f"{time_name} has submited their availability.")
     if not check:
-        return render_template("errorpage1.html")
+        # return render_template("errorpage1.html")
+        return str(output)
 
-    optimal = ""
-    free = ""
+    # calculates optimal time imported from converter
+    scheduler_output = optimal_time(event_name)
+    if len(scheduler_output) != 0:
+        optimal = f"From {scheduler_output[0][1]} to {scheduler_output[0][2]}. "
+    else:
+        optimal = "No optimal time found."
+
     # looks for POST request
     if request.method == "POST":
         schedule = request.form
@@ -83,40 +97,31 @@ def event(event_name, name):
         for item in schedule:
             schedule_list.append(item)
         person.append(schedule_list)
-        # opens event and name pickle
+        # opens event and name pickle and rewrites it with updated times
         with open(f"schedule/{event_name}_{person[0]}.pickle", "wb") as f:
             pickle.dump(person, f)
         # calculates optimal time imported from converter
-        free = ""
         scheduler_output = optimal_time(event_name)
         if len(scheduler_output) != 0:
             optimal = f"From {scheduler_output[0][1]} to {scheduler_output[0][2]}. "
-            # creates string of times and people free
-            for blocks in scheduler_output[0][3]:
-                if len(blocks[1]) == 0:
-                    free += f"""
-                    No one is free from {blocks[0]} to {blocks[0]+30}."""
-                elif 0 < len(blocks[1]) <= 1:
-                    free += f"""
-                    Person that is free from {blocks[0]} to {blocks[0]+30} is {blocks[1][0]}."""
-                else:
-                    free += f"""
-                    People that are free from {blocks[0]} to {blocks[0]+30} are """
-                    for people in blocks[1]:
-                        free += f"{people}"
-                        if blocks[1].index(people) == len(blocks[1]) - 1:
-                            free += "."
-                        else:
-                            free += ", "
         else:
             optimal = "No optimal time found."
-        # writes in avaiable time of every person
+        # writes in whether people have inputted times
         time_list = []
         for i in range(5):
             time_name = output[f"name{i+1}"]
-            # creates a schedule object from pickle_reader in converter
+            # checks for case sensativity otherwise program breaks
+            check = name == time_name or check
+            # creates a schedule object from pickle_reader in converter and checks if it exists
             schedule = pickle_reader(time_name, event_name)
-            time_list.append(schedule)
+            if isinstance(schedule, str):
+                time_list.append("")
+            elif schedule.availability == blank_schedule():
+                time_list.append(
+                    f"{time_name} has not submited their availability yet."
+                )
+            else:
+                time_list.append(f"{time_name} has submited their availability.")
     return render_template(
         "scheduler.html",
         event=output["InputEventName"],
@@ -132,7 +137,6 @@ def event(event_name, name):
         time5=time_list[4],
         length=output["meetingTime"],
         optimal=optimal,
-        detail=free,
     )
 
 
