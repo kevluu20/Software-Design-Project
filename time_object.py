@@ -1,5 +1,6 @@
 ### creating objects for schedule and related functions
-### the scheduler will be built on 15 minute intervals starting from 00:00 to 23:59
+### the scheduler will be built on 30 minute intervals starting from 00:00 to 23:59
+### time_object creates foundational object Time
 
 
 class Time:
@@ -37,18 +38,22 @@ class Time:
 
     def __gt__(self, other):
         """compares 2 Times to create special method: greater than"""
+        # compares days, if it is equal it moves to hour
         if self.day > other.day:
             return True
         elif self.day < other.day:
             return False
+        # compares hour, if it is equal it moves to minutes
         elif self.hour > other.hour:
             return True
         elif self.hour < other.hour:
             return False
+        # compares minute, if it is equal then it is not greater than
         elif self.minute > other.minute:
             return True
         elif self.minute < other.minute:
             return False
+        # if completly equal, returns false
         return False
 
     def __add__(self, minutes):
@@ -72,13 +77,19 @@ class Time:
 
     def time_difference(self, other):
         """input 2 time objects, returns difference minutes"""
+        # difference in days converted to minutes
         difference = (other.day - self.day) * 24 * 60
+        # difference in hours converted to minutes
         difference += (other.hour - self.hour) * 60
+        # differnce in minutes
         difference += other.minute - self.minute
+        # returns total difference
         return difference
 
     def minute_to_block(self):
         """converts time to block time"""
+        # block 0 is minute 0-29
+        # block 1 is minute 30-59
         if self.minute < 30:
             return 0
         return 1

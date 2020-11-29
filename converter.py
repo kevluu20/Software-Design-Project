@@ -32,7 +32,7 @@ def time_converter(time_list):
 
 def pickle_reader(person, event):
     """ reads in pickle based on person and event and outputs Schedule object"""
-    # if pickle doesnt exist return None type
+    # if pickle doesnt exist return blank string
     if not os.path.isfile(f"schedule/{event}_{person}.pickle"):
         return ""
     with open(f"schedule/{event}_{person}.pickle", "rb") as f:
