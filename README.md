@@ -9,6 +9,9 @@ This Project was composed for the Babson College Problem Solving and Web Design 
 #### 4. Conclusion
 
 ## **Project Overview**
+
+![Image of Homepage](https://github.com/kevluu20/Software-Design-Project/blob/master/Homepage.JPG)
+
 The premise of our project was to solve a challenge that several people are experiencing working in a remote environment. We hoped to offer a solution to finding optimal meeting times across several schedules for multiple potential dates. We explored several different components of programming to offer an application that can handle the complexity of storing data while providing an attractive user interface. Our application is designed to find the optimal time for recurring meetings for teams consisting of five or less members. Once all of the members have inputted their availability for a week, the optimal time for the group to meet will be outputted on the website’s display. 
 
 ## **Application Installment**
